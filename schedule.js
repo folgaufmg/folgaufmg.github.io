@@ -142,6 +142,9 @@
   function timeRange(e){ return e.start + (e.end ? '–' + e.end : ''); }
 
   function isTBA(t){ return !t || /^tba$/i.test(t); }
+  // Writing "To be confirmed" (or TBC) in the title column marks the speaker as not yet confirmed
+  function isTBC(t){ return /^(tbc|to be confirmed)$/i.test((t || '').trim()); }
+  var TBC_TAG = '<span class="tbc">to be confirmed</span>';
 
   /* ---------- Home: speaker list ---------- */
   function renderSpeakers(el, statusEl, events){
@@ -153,7 +156,8 @@
     el.innerHTML = list.map(function(e){
       return '<a class="spk" href="program.html#' + e.id + '">' +
         '<span class="av" aria-hidden="true">' + esc(initials(e.speaker)) + '</span>' +
-        '<span><span class="nm">' + esc(e.speaker) + '</span><br><span class="af">' + esc(e.affiliation) + '</span></span></a>';
+        '<span><span class="nm">' + esc(e.speaker) + '</span><br><span class="af">' + esc(e.affiliation) + '</span>' +
+        (isTBC(e.title) ? '<br>' + TBC_TAG : '') + '</span></a>';
     }).join('');
     if (statusEl) statusEl.textContent = list.length + ' invited speakers. Titles and abstracts will be announced on the program page.';
   }
@@ -164,7 +168,7 @@
     if (e.type === 'talk' && e.speaker){
       who = e.speaker;
       sub = (e.affiliation ? '<span class="aff">' + esc(e.affiliation) + '</span>' : '') +
-            (!isTBA(e.title) ? '<span class="ttl">' + esc(e.title) + '</span>' : '');
+            (isTBC(e.title) ? TBC_TAG : !isTBA(e.title) ? '<span class="ttl">' + esc(e.title) + '</span>' : '');
     } else {
       who = e.title || TYPE_LABELS[e.type] || e.type;
       if (e.type === 'roundtable'){
@@ -276,7 +280,8 @@
         (e.affiliation ? ' <span class="aff">· ' + esc(e.affiliation) + '</span>' : '') +
         (e.type === 'roundtable' && e.speaker ? ' <span class="aff">· ' + esc(e.speaker) + '</span>' : '') + '</span>' +
         '<span class="slot">' + d.short + ' ' + d.pretty + ' · ' + timeRange(e) + '</span></div>' +
-        (isTBA(title) ? '<div class="ttl pending">Title to be announced</div>' : '<div class="ttl">' + esc(title) + '</div>') +
+        (isTBC(title) ? '<div class="ttl pending">' + TBC_TAG + '</div>' :
+         isTBA(title) ? '<div class="ttl pending">Title to be announced</div>' : '<div class="ttl">' + esc(title) + '</div>') +
         (e.abstract ? '<details><summary>Abstract</summary><div class="abs">' + esc(e.abstract) + '</div></details>' : '') +
         '</article>';
     }).join('');
