@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registration · FOLGA 2026</title>
+<meta name="description" content="Registration for the Symposium on Supergeometry, Algebraic Geometry and Foliations, November 30 to December 4, 2026, UFMG.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="favicon.svg" alt=""><span>Symposium <b>2026</b></span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="program.html">Program</a></li>
+      <li><a href="index.html#speakers">Speakers</a></li>
+      <li><a href="registration.html" aria-current="page">Registration</a></li>
+      <li><a href="index.html#venue">Venue &amp; Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="wrap">
+    <h1>Registration</h1>
+    <p>November 30 to December 4, 2026 · ICEx, UFMG · Registration is free and open to everyone.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap reg">
+    <p class="reg-notice" id="reg-notice" hidden>Registration opens soon. In the meantime, write to
+      <a href="mailto:arturo.fernandezperez@gmail.com">arturo.fernandezperez@gmail.com</a>.</p>
+
+    <form id="reg-form" method="POST" target="reg-frame">
+      <fieldset>
+        <legend>About you</legend>
+        <div class="field">
+          <label for="f-name">Full name <i>*</i></label>
+          <input id="f-name" type="text" data-key="name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-email">Email <i>*</i></label>
+          <input id="f-email" type="email" data-key="email" autocomplete="email" required>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="f-inst">Institution <i>*</i></label>
+            <input id="f-inst" type="text" data-key="institution" autocomplete="organization" required>
+          </div>
+          <div class="field">
+            <label for="f-country">Country <i>*</i></label>
+            <input id="f-country" type="text" data-key="country" autocomplete="country-name" value="Brazil" required>
+          </div>
+        </div>
+        <div class="field">
+          <span class="lbl">Academic position <i>*</i></span>
+          <div class="choices">
+            <label><input type="radio" data-key="position" value="Undergraduate student" required> Undergraduate student</label>
+            <label><input type="radio" data-key="position" value="Master's student"> Master's student</label>
+            <label><input type="radio" data-key="position" value="PhD student"> PhD student</label>
+            <label><input type="radio" data-key="position" value="Postdoc"> Postdoc</label>
+            <label><input type="radio" data-key="position" value="Faculty / Researcher"> Faculty / Researcher</label>
+            <label><input type="radio" data-key="position" value="High school teacher"> High school teacher</label>
+            <label><input type="radio" data-key="position" value="Other"> Other</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Participation</legend>
+        <div class="field">
+          <span class="lbl">Days you plan to attend <i>*</i></span>
+          <div class="choices days">
+            <label><input type="checkbox" data-key="days" value="Monday, Nov 30"> <b>Mon</b> Nov 30</label>
+            <label><input type="checkbox" data-key="days" value="Tuesday, Dec 1"> <b>Tue</b> Dec 1</label>
+            <label><input type="checkbox" data-key="days" value="Wednesday, Dec 2"> <b>Wed</b> Dec 2</label>
+            <label><input type="checkbox" data-key="days" value="Thursday, Dec 3"> <b>Thu</b> Dec 3</label>
+            <label><input type="checkbox" data-key="days" value="Friday, Dec 4"> <b>Fri</b> Dec 4</label>
+          </div>
+        </div>
+        <div class="field">
+          <span class="lbl">Would you like to present a poster? <i>*</i></span>
+          <p class="hint">Poster sessions are on Tuesday and Thursday, intended mainly for students and early-career researchers.</p>
+          <div class="choices inline">
+            <label><input type="radio" data-key="poster" value="Yes" required> Yes</label>
+            <label><input type="radio" data-key="poster" value="No"> No</label>
+          </div>
+        </div>
+        <div class="poster-fields" id="poster-fields" hidden>
+          <div class="field">
+            <label for="f-ptitle">Poster title <i>*</i></label>
+            <input id="f-ptitle" type="text" data-key="poster_title">
+          </div>
+          <div class="field">
+            <label for="f-pabs">Poster abstract <i>*</i></label>
+            <textarea id="f-pabs" rows="6" data-key="poster_abstract"></textarea>
+            <p class="hint">LaTeX between $...$ is fine.</p>
+          </div>
+        </div>
+        <div class="field">
+          <span class="lbl">Do you need a certificate of participation? <i>*</i></span>
+          <div class="choices inline">
+            <label><input type="radio" data-key="certificate" value="Yes" required> Yes</label>
+            <label><input type="radio" data-key="certificate" value="No"> No</label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-comments">Comments</label>
+          <textarea id="f-comments" rows="3" data-key="comments"></textarea>
+          <p class="hint">Accessibility needs, dietary restrictions, questions to the organizers.</p>
+        </div>
+      </fieldset>
+
+      <div class="reg-actions">
+        <button class="btn" type="submit" id="reg-submit">Register</button>
+        <span class="hint"><i>*</i> required</span>
+      </div>
+    </form>
+
+    <div class="reg-done" id="reg-done" hidden>
+      <h3>Thank you!</h3>
+      <p>Your registration was received. See you at UFMG, from November 30 to December 4.</p>
+      <p><a href="program.html">See the program</a> · <a href="index.html">Back to the home page</a></p>
+    </div>
+
+    <iframe name="reg-frame" id="reg-frame" title="" hidden></iframe>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>Symposium 2026</b><br>Departamento de Matemática · ICEx · UFMG</div>
+    <div>Contact: <a href="mailto:arturo.fernandezperez@gmail.com">arturo.fernandezperez@gmail.com</a></div>
+  </div>
+</footer>
+
+<script src="schedule.js"></script>
+<script src="registration.js"></script>
+</body>
+</html>
