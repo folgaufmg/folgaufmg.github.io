@@ -358,3 +358,5 @@ footer b{ color:#fff; font-family:var(--head); font-weight:500; letter-spacing:.
 /* Sponsor logos */
 .sponsor .logo{ align-self:flex-start; height:56px; width:auto; max-width:100%; object-fit:contain; margin-bottom:10px; }
 .sponsor .logo.tall{ height:72px; }
+.org-label{ font-family:var(--head); text-transform:uppercase; letter-spacing:.14em; font-size:14px; color:var(--coral-dark); margin:0 0 12px; }
+.support.org{ margin-bottom:32px; }
