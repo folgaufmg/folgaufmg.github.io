@@ -2,6 +2,7 @@
  * Formats the FOLGA 2026 schedule sheet so it is easy to edit by hand.
  * Run once from the sheet: Extensions → Apps Script → paste → Run "formatFolgaSheet".
  *
+ * Formulas avoid commas so it works with any spreadsheet locale (pt-BR uses ';').
  * It only changes formatting, dropdowns and notes. Values are untouched, the header
  * names stay the same (the site reads them), and the schedule stays as the FIRST tab.
  */
@@ -55,10 +56,7 @@ function formatFolgaSheet() {
   sh.getRange(2, 4, maxRows - 1, 1).setDataValidation(
     SpreadsheetApp.newDataValidation().requireValueInList(types, true).setAllowInvalid(false)
       .setHelpText('Kind of activity; it sets the colour on the site').build());
-  var timeRule = SpreadsheetApp.newDataValidation()
-    .requireFormulaSatisfied('=OR(B2="",REGEXMATCH(TO_TEXT(B2),"^\\d{1,2}:\\d{2}$"))')
-    .setAllowInvalid(true).setHelpText('24h time, e.g. 09:00').build();
-  sh.getRange(2, 2, maxRows - 1, 2).setDataValidation(timeRule);
+  sh.getRange(2, 2, maxRows - 1, 2).clearDataValidations();
 
   // Conditional colours
   var rules = [];
@@ -77,20 +75,19 @@ function formatFolgaSheet() {
   rowRule('=$D2="lunch"', '#F3F3F3', '#8A8A8A');
   rowRule('=$D2="free"', '#F3F3F3', '#8A8A8A', false, true);
   rowRule('=$D2="posters"', '#EEF3F1');
-  rowRule('=OR($D2="opening",$D2="closing",$D2="social")', '#ECECEC', null, true);
+  ['opening', 'closing', 'social'].forEach(function (t) { rowRule('=$D2="' + t + '"', '#ECECEC', null, true); });
   rowRule('=$D2="reception"', null, '#8A8A8A');
-  // Talks: a soft tint per day so the days are easy to tell apart
-  var dayTint = { Mon: '#FFFFFF', Tue: '#FAFAFA', Wed: '#FFFFFF', Thu: '#FAFAFA', Fri: '#FFFFFF' };
-  days.forEach(function (d) { rowRule('=AND($D2="talk",$A2="' + d + '")', dayTint[d]); });
-
   // TBA / to be confirmed in grey italic (title and speaker cells)
-  var tba = SpreadsheetApp.newConditionalFormatRule()
-    .whenFormulaSatisfied('=REGEXMATCH(LOWER(E2),"^(tba|tbc|to be confirmed)$")')
-    .setFontColor('#9A9A9A').setItalic(true).setRanges([sh.getRange(2, 5, maxRows - 1, 1)]).build();
-  var tbcSpeaker = SpreadsheetApp.newConditionalFormatRule()
-    .whenFormulaSatisfied('=REGEXMATCH(LOWER(F2),"\\((tbc|to be confirmed)\\)")')
-    .setFontColor('#D3413F').setRanges([sh.getRange(2, 6, maxRows - 1, 1)]).build();
-  sh.setConditionalFormatRules([tba, tbcSpeaker].concat(rules));
+  var titleCol = sh.getRange(2, 5, maxRows - 1, 1), speakerCol = sh.getRange(2, 6, maxRows - 1, 1);
+  var greyRules = ['tba', 'tbc', 'to be confirmed'].map(function (t) {
+    return SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied('=LOWER(E2)="' + t + '"')
+      .setFontColor('#9A9A9A').setItalic(true).setRanges([titleCol]).build();
+  });
+  var redRules = ['to be confirmed', '(tbc)'].map(function (t) {
+    return SpreadsheetApp.newConditionalFormatRule().whenTextContains(t)
+      .setFontColor('#D3413F').setRanges([speakerCol]).build();
+  });
+  sh.setConditionalFormatRules(greyRules.concat(redRules, rules));
 
   // Thick line between days
   var vals = sh.getRange(2, 1, lastRow - 1, 1).getValues();
