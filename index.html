@@ -68,7 +68,7 @@
     <div class="facts">
       <div class="fact"><div class="n">5</div><div class="l">days</div></div>
       <div class="fact"><div class="n" id="n-speakers">20</div><div class="l">invited talks</div></div>
-      <div class="fact"><div class="n">5</div><div class="l">poster sessions</div></div>
+      <div class="fact"><div class="n" id="n-posters">2</div><div class="l">poster sessions</div></div>
       <div class="fact"><div class="n">1</div><div class="l">round table</div></div>
     </div>
   </div>
@@ -106,7 +106,7 @@
       <div class="committee">
         <h3>Scientific Committee</h3>
         <ul>
-          <li>Ugo Bruzzo <em class="role">Chair</em><span>UFMG</span></li>
+          <li>Ugo Bruzzo<span>UFMG</span></li>
           <li>Alejandro Cabrera<span>UFRJ</span></li>
           <li>Marcos Jardim<span>UNICAMP</span></li>
           <li>Renato Vidal Martins<span>UFMG</span></li>
@@ -173,6 +173,8 @@ FOLGA.load().then(function(ev){
   FOLGA.renderSpeakers(document.getElementById('speaker-list'), document.getElementById('speaker-status'), ev);
   var n = ev.filter(function(e){ return e.type === 'talk' && e.speaker; }).length;
   if (n) document.getElementById('n-speakers').textContent = n;
+  var np = ev.filter(function(e){ return e.type === 'posters'; }).length;
+  document.getElementById('n-posters').textContent = np;
 }).catch(function(err){
   document.getElementById('speaker-status').textContent = 'Could not load the speaker list right now. Please reload the page.';
   console.error(err);
