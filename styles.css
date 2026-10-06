@@ -67,10 +67,12 @@ a:hover{ color:var(--coral); }
   background:linear-gradient(90deg, rgba(31,31,31,.72) 0%, rgba(31,31,31,.45) 40%, rgba(31,31,31,0) 75%);
 }
 .hero-credit{
-  position:absolute; z-index:1; right:16px; bottom:10px; margin:0;
-  font-family:var(--head); font-size:13px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--coral); background:rgba(31,31,31,.72); padding:5px 12px; border-radius:3px;
+  position:absolute; z-index:1; right:24px; bottom:14px; margin:0;
+  display:flex; align-items:center; gap:10px;
+  font-size:12px; font-style:italic; color:rgba(255,255,255,.92); text-shadow:0 1px 3px rgba(0,0,0,.9), 0 0 10px rgba(0,0,0,.6);
 }
+.hero-credit::before{ content:""; width:24px; height:2px; background:var(--coral); flex:none; }
+.hero-credit b{ color:var(--coral); font-style:normal; font-weight:600; }
 .hero .wrap{ position:relative; z-index:1; text-shadow:0 2px 12px rgba(0,0,0,.55); }
 .kicker{
   font-family:var(--head); font-size:15px; letter-spacing:.22em; text-transform:uppercase;
@@ -281,7 +283,7 @@ footer b{ color:#fff; font-family:var(--head); font-weight:500; letter-spacing:.
   .nav-links.open{ display:flex; }
   .hero{ padding:64px 0 72px; background-image:url("img/pampulha-1200.jpg"); }
   .hero::after{ background:linear-gradient(180deg, rgba(31,31,31,.7) 0%, rgba(31,31,31,.5) 60%, rgba(31,31,31,.25) 100%); }
-  .hero-credit{ left:16px; right:16px; font-size:12px; }
+  .hero-credit{ left:16px; right:16px; font-size:11px; }
   section{ padding:52px 0; }
   .feature{ grid-template-columns:1fr; padding:24px; }
   .feature .when{ justify-self:start; }
