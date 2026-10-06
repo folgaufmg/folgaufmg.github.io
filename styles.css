@@ -354,3 +354,7 @@ footer b{ color:#fff; font-family:var(--head); font-weight:500; letter-spacing:.
   .fee{ border-right:0; border-bottom:1px solid var(--line); }
   .fee:last-child{ border-bottom:0; }
 }
+
+/* Sponsor logos */
+.sponsor .logo{ align-self:flex-start; height:56px; width:auto; max-width:100%; object-fit:contain; margin-bottom:10px; }
+.sponsor .logo.tall{ height:72px; }
