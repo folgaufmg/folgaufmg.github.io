@@ -24,7 +24,7 @@ function createFolgaRegistrationForm() {
   var form = FormApp.create('FOLGA 2026 · Registration');
   form.setTitle('Symposium on Supergeometry, Algebraic Geometry and Foliations · Registration')
       .setDescription('November 30 to December 4, 2026 · ICEx, UFMG, Belo Horizonte, Brazil.\n' +
-                      'Registration is free. Site: https://folgaufmg.github.io')
+                      'Registration fee: R$ 100 for faculty and postdocs, R$ 50 for students (Pix). Site: https://folgaufmg.github.io')
       .setConfirmationMessage('Thank you! Your registration was received. See you at UFMG.')
       .setCollectEmail(false)
       .setAllowResponseEdits(false)

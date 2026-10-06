@@ -340,3 +340,17 @@ footer b{ color:#fff; font-family:var(--head); font-weight:500; letter-spacing:.
   .reg .row{ grid-template-columns:1fr; }
   .reg fieldset{ padding:20px 16px 4px; }
 }
+
+/* Registration fee */
+.fees{ margin-bottom:32px; }
+.fee-grid{ display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); background:var(--paper); margin-top:20px; }
+.fee{ padding:20px 22px; border-right:1px solid var(--line); }
+.fee:last-child{ border-right:0; }
+.fee .v{ font-family:var(--head); font-size:34px; color:var(--coral); line-height:1; }
+.fee .w{ font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-top:6px; }
+.fees .pay{ margin:14px 0 0; color:var(--ink-2); }
+@media (max-width: 760px){
+  .fee-grid{ grid-template-columns:1fr; }
+  .fee{ border-right:0; border-bottom:1px solid var(--line); }
+  .fee:last-child{ border-bottom:0; }
+}
